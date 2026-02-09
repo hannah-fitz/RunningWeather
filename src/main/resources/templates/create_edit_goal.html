@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="de"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout.html">
+
+<head>
+    <title>Trainingsziel bearbeiten</title>
+</head>
+
+<body>
+
+<section layout:fragment="content">
+
+    <form method="POST" th:action="${goal.id} != null ? @{'/goal/update/' + ${goal.id}} : @{/goal}" th:object="${goal}">
+        <input type="hidden" th:field="*{id}" />
+
+        <label for="goal_type">Was möchtest du pro Woche erreichen?</label>
+        <select th:field="*{type}" id="goal_type" required>
+            <option value="DISTANCE" default class="mx-3">Distanz</option>
+            <option value="NUMBER" class="mx-3">Anzahl Trainings</option>
+        </select>
+
+        <input type="text" th:field="*{targetAmount}" required/>
+
+        <button type="submit" class="btn btn-primary w-100">Speichern</button>
+    </form>
+
+</section>
+
+
+</body>
+</html>

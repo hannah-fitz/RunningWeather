@@ -1,0 +1,68 @@
+<article th:fragment="recommendations" xmlns:th="http://www.w3.org/1999/xhtml">
+
+
+    <div th:each="recommendation : ${recommendations}" class="component recommendation_card">
+        <div class="component_box">
+
+            <div class="d-flex align-items-center">
+                <i class="fa-solid fa-calendar mb-3"></i>
+                <h3 th:text="${#temporals.format(recommendation.time, 'EEEE, dd. MMM, HH:mm')}" class="fw-bold mb-3"></h3>
+            </div>
+
+            <div class="d-flex justify-content-between">
+                <p class="tag mt-2 match">
+                    <span th:text="${recommendation.scorePercent} + '% matching'"></span>
+                </p>
+                <div class="d-flex align-items-end flex-column">
+                    <div class="weather_icon_wrapper">
+                        <img class="weather_icon" th:src="@{/icons/{icon}(icon=${recommendation.weatherCondition.icon})}" alt="Wetter">
+                    </div>
+                </div>
+            </div>
+
+            <div class="d-flex flex-wrap my-2">
+                <div class="d-flex align-items-center me-4 minw_110">
+                    <i class="fa-solid fa-temperature-full"></i>
+                    <div>
+                        <p class="small mb-0">Temperatur</p>
+                        <p class="mb-0">
+                            <span th:text="${recommendation.roundedTemperature} + ' °C'"></span>
+                        </p>
+                    </div>
+                </div>
+                <div class="d-flex align-items-center me-4 minw_110">
+                    <i class="fa-solid fa-wind"></i>
+                    <div>
+                        <p class="small mb-0">Wind</p>
+                        <p class="mb-0">
+                            <span th:text="${recommendation.roundedWindSpeed} + ' km/h'"></span>
+                        </p>
+                    </div>
+                </div>
+                <div class="d-flex align-items-center me-4 minw_110">
+                    <i class="fa-solid fa-cloud-showers-heavy"></i>
+                    <div>
+                        <p class="small mb-0">Regen</p>
+                        <p class="mb-0">
+                            <span th:text="${recommendation.roundedRain} + ' mm'"></span>
+                        </p>
+                    </div>
+                </div>
+                <div class="d-flex align-items-center me-4 minw_110">
+                    <i class="fa-solid fa-cloud"></i>
+                    <div>
+                        <p class="small mb-0">Bewölkung</p>
+                        <p class="mb-0">
+                            <span th:text="${recommendation.roundedClouds} + ' %'"></span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="d-flex flex-wrap gap-2 my-4">
+                <span th:each="tag : ${recommendation.tags}" th:text="${tag}" class="small tag me-1"></span>
+            </div>
+
+        </div>
+    </div>
+</article>

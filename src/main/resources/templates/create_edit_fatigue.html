@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="de"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout.html">
+
+<head>
+    <title>Training</title>
+</head>
+
+<body>
+
+<section layout:fragment="content">
+
+    <h1 class="fw-bold" th:text="${fatigueFactor.id != null ? 'Belastung bearbeiten' : 'Neue Belastung hinzufügen'}"></h1>
+
+    <form method="POST"
+          th:action="${fatigueFactor.id} != null ? @{'/fatigue/update/' + ${fatigueFactor.id}} : @{/fatigue}"
+          th:object="${fatigueFactor}"
+          class="createEditRun d-flex flex-column">
+
+        <label for="category">Welche sonstige Belastung möchtest du eintragen?</label>
+        <input type="text" th:field="*{category}" id="category" required/>
+
+        <label for="fatigueLevel">Wie sehr erschöpft es dich auf einer Skala von 0 (gar nicht) bis 10 (maximal)?</label>
+        <input type="number" th:field="*{fatigueLevel}" min="0" max="10" step="1" id="fatigueLevel" required/>
+
+        <label for="datetime">Datum und Uhrzeit</label>
+        <input type="datetime-local" th:field="*{datetime}" id="datetime" required/>
+
+        <input type="hidden" th:field="*{id}" />
+
+        <button type="submit" class="btn btn-primary w-100">Speichern</button>
+    </form>
+
+</section>
+
+
+</body>
+</html>

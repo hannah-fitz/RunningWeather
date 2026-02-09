@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="de"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout.html"
+
+>
+<head>
+    <title>Wetter</title>
+</head>
+
+<body>
+
+    <section layout:fragment="content">
+
+        <nav class="nav_bar weather">
+            <div class="d-flex justify-content-center flex-column">
+
+                <div class="mb-3">
+                    <span class="tag d-flex align-items-center">
+                        <i class="fa-solid fa-location-dot me-2"></i>
+                        <p th:text="${runner.location.address}"></p>
+                    </span>
+                </div>
+
+                <ul class="nav d-flex justify-content-between align-items-center flex-nowrap">
+                    <li class="nav-item">
+                        <button class="nav-link px-3 w-100 active" onclick="showForecast(0)">Heute</button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="nav-link px-3 w-100" onclick="showForecast(1)">Morgen</button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="nav-link px-3 w-100" onclick="showForecast(2)">Übermorgen</button>
+                    </li>
+                </ul>
+
+            </div>
+        </nav>
+
+        <div id="weather_container">
+
+        </div>
+
+
+    </section>
+
+
+</body>
+</html>

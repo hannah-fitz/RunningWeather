@@ -1,0 +1,28 @@
+<nav th:fragment="navbar" class="nav_bar" xmlns:th="http://www.w3.org/1999/xhtml">
+    <div class="component_box d-flex justify-content-center flex-column">
+
+        <div class="w-100 text-center">
+            <img class="weather_icon" th:src="@{/icons/sonne.png}" alt="Sonne">
+        </div>
+
+        <a class="text-center p-3" href="/">Running Weather</a>
+
+        <ul class="nav d-flex justify-content-between flex-nowrap">
+            <li class="nav-item">
+                <a class="nav-link" th:classappend="${currentPath == '/'} ? ' active'" href="/">Planung</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:classappend="${currentPath == '/weather'} ? ' active'" href="/weather">Wetter</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:classappend="${currentPath == '/fatigue/calendar'} ? ' active'" href="/fatigue/calendar">Kalender</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:classappend="${currentPath == '/settings'} ? ' active'" href="/settings">
+                    <i class="fa-solid fa-ellipsis"></i>
+                </a>
+            </li>
+        </ul>
+
+    </div>
+</nav>

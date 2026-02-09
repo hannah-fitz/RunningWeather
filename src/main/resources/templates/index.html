@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="de"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout.html">
+
+<head>
+    <title>Running Weather</title>
+</head>
+
+<body>
+
+    <section layout:fragment="content">
+
+        <div th:replace="~{fragments/settings/weekly_goal :: weekly_goal}"></div>
+        <div th:replace="~{fragments/recommendations :: recommendations}"></div>
+
+    </section>
+
+
+</body>
+</html>

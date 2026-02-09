@@ -1,0 +1,43 @@
+<article th:fragment="profile" class="component" xmlns:th="http://www.w3.org/1999/xhtml">
+    <div class="component_box">
+
+        <form method="POST" th:action="@{/settings/update}" th:object="${runner}" class="my-3">
+
+            <div class="my-2">
+                <h2>Account</h2>
+                <div class="my-2">
+                    <label for="name" class="me-3">Benutzername: </label>
+                    <input type="text" class="w-50" th:field="*{name}" id="name" name="name" disabled>
+                </div>
+                <div class="my-2">
+                    <button class="btn btn-primary disabled">Passwort ändern</button>
+                    <button class="btn btn-primary disabled">Account löschen</button>
+                </div>
+            </div>
+
+            <div class="my-5">
+                <h2>Athletenprofil</h2>
+                <p class="my-2">Sag uns mehr über dein Training, damit wir die entstandene Belastung nach den Trainingseinheiten besser einschätzen können.</p>
+
+                <label for="maxComfortableDistance">Wie viele Kilometer läufst du maximal bei einem Longrun?</label>
+                <input type="number" class="w-50" th:field="*{maxComfortableDistance}" id="maxComfortableDistance" name="maxComfortableDistance" placeholder="15.0">
+
+                <label for="comfortablePace">Was ist deine Pace bei einem entspannten Dauerlauf?</label>
+                <p class="my-2">(in Sekunden pro Kilometer)</p>
+                <input type="number" class="w-50" th:field="*{comfortablePace}" id="comfortablePace" name="comfortablePace" placeholder="300 (5:00 min/km)">
+            </div>
+
+        </form>
+
+        <form method="POST" th:action="@{/settings/location}" th:object="${locationUpdateDTO}">
+            <label for="address">Trainingsort: </label>
+            <input type="text" th:field="*{address}" id="address" name="address" autocomplete="off" placeholder="Stadt oder Adresse"/>
+            <input type="hidden" th:field="*{latitude}" id="latitude" name="latitude"/>
+            <input type="hidden" th:field="*{longitude}" id="longitude" name="longitude"/>
+            <ul id="location_suggestions"></ul>
+            <button class="btn btn-primary" type="submit">Speichern</button>
+        </form>
+
+
+    </div>
+</article>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="de"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout.html">
+
+<head>
+    <title>Kalender</title>
+</head>
+
+<body>
+
+    <section layout:fragment="content">
+
+        <div class="component">
+            <div class="component_box">
+                <a href="/runs/new" class="btn-primary btn w-100 py-3 mb-3">Laufeinheit eintragen</a>
+                <a href="/fatigue/new" class="btn-primary btn w-100 py-3">Sonstige Belastung eintragen</a>
+            </div>
+        </div>
+
+        <ul class="component runs">
+
+            <li th:each="day : ${days}" class="component_box my-2">
+                <h4 th:text="${#temporals.format(day.date, 'EEEE, dd. MMM')}" class="mb-3"></h4>
+                <div th:if="${day.empty}">
+                    <i class="fa-solid fa-moon me-2"></i>
+                    <span>Kein Training</span>
+                </div>
+
+                <ul th:unless="${day.empty}">
+                    <li th:each="fatigueFactor : ${day.fatigueFactors}" class="py-2">
+
+                            <!-- RUN -->
+                            <div class="d-flex flex-nowrap justify-content-between" th:if="${fatigueFactor.category == 'run' }" th:with="run=${fatigueFactor}">
+                                <div class="d-flex">
+                                    <i class="fa-solid fa-person-running fa_icon_big me-4"></i>
+                                    <div class="h-100 d-flex flex-column justify-content-evenly">
+                                        <p><span th:text="${run.distance}" class="fw-bold"></span> km</p>
+                                        <p><span th:text="${run.duration}"></span> min</p>
+                                    </div>
+                                </div>
+                                <div class="d-flex">
+                                    <div class="d-flex flex-column align-items-end me-3">
+                                        <span th:text="${#temporals.format(run.datetime, 'HH:mm')}"></span>
+                                    </div>
+                                    <div class="d-flex flex-column align-items-end">
+                                        <a th:href="@{'/runs/edit/' + ${run.id}}" class="mb-2">
+                                            <i class="fa-regular fa-pen-to-square"></i>
+                                        </a>
+                                        <a th:href="@{'/runs/delete/' + ${run.id}}">
+                                            <i class="fa-solid fa-trash"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- OTHER FATIGUE FACTOR -->
+                            <div class="d-flex flex-nowrap justify-content-between" th:unless="${fatigueFactor.category == 'run' }">
+                                <div class="d-flex">
+                                    <i class="fa-solid fa-heart-pulse fa_icon_big me-4"></i>
+                                    <div class="h-100 d-flex flex-column justify-content-evenly">
+                                        <p><span th:text="${fatigueFactor.category}" class="fw-bold"></span></p>
+                                        <p><span>Belastung: </span><span th:text="${fatigueFactor.fatigueLevel}"></span> von 10</p>
+                                    </div>
+                                </div>
+                                <div class="d-flex">
+                                    <div class="d-flex flex-column align-items-end me-3">
+                                        <span th:text="${#temporals.format(fatigueFactor.datetime, 'HH:mm')}"></span>
+                                    </div>
+                                    <div class="d-flex flex-column align-items-end">
+                                        <a th:href="@{'/fatigue/edit/' + ${fatigueFactor.id}}" class="mb-2">
+                                            <i class="fa-regular fa-pen-to-square"></i>
+                                        </a>
+                                        <a th:href="@{'/fatigue/delete/' + ${fatigueFactor.id}}">
+                                            <i class="fa-solid fa-trash"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                    </li>
+                </ul>
+            </li>
+
+        </ul>
+
+        <a href="/runs/new" class="btn-primary btn w-100 py-3">Training hinzufügen</a>
+
+
+
+    </section>
+
+
+</body>
+</html>

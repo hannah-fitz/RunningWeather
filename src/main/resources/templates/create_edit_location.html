@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="de"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout.html">
+
+<head>
+    <title>Trainingsziel bearbeiten</title>
+</head>
+
+<body>
+
+<section layout:fragment="content">
+
+    <form method="POST" th:action="@{/location}" th:object="${locationUpdateDTO}">
+        <label for="address">Ort</label>
+        <input type="text" id="address" name="address" autocomplete="off" placeholder="Stadt oder Adresse"/>
+        <input type="hidden" id="latitude" name="latitude"/>
+        <input type="hidden" id="longitude" name="longitude"/>
+        <ul class="location_suggestions"></ul>
+        <button type="submit">Speichern</button>
+    </form>
+
+</section>
+</body>
+</html>

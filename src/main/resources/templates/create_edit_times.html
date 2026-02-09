@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="de"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout.html">
+
+<head>
+    <title>Trainingszeiten bearbeiten</title>
+</head>
+
+<body>
+
+<section layout:fragment="content">
+
+    <form method="POST" th:action="${trainingTime.id} != null ? @{'/times/update/' + ${trainingTime.id}} : @{/times}" th:object="${trainingTime}">
+
+        <p>Trage hier einen neuen Zeitslot ein, an dem du diese Woche Zeit fürs Training hast.</p>
+        <fieldset>
+            <label for="training_day">Wochentag</label>
+            <select th:field="*{dayOfWeek}" id="training_day" required>
+                <option th:each="day : ${days}"
+                        th:value="${day}"
+                        th:text="${day.getDisplayName(T(java.time.format.TextStyle).FULL, T(java.util.Locale).GERMAN)}">
+                </option>
+            </select>
+        </fieldset>
+
+        <fieldset>
+            <label for="startTime">Startzeit</label>
+            <input type="time"
+                   th:field="*{startTime}"
+                   id="startTime"
+                   required />
+        </fieldset>
+
+        <fieldset>
+            <label for="endTime">Endzeit</label>
+            <input type="time"
+                   th:field="*{endTime}"
+                   id="endTime"
+                   required />
+        </fieldset>
+
+
+        <button type="submit" class="btn btn-primary w-100">Speichern</button>
+    </form>
+
+</section>
+
+
+</body>
+</html>

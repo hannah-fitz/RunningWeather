@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="de"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout.html">
+
+<head>
+    <title>Training</title>
+</head>
+
+<body>
+
+<section layout:fragment="content">
+
+    <h1 class="fw-bold" th:text="${run.id != null ? 'Training bearbeiten' : 'Neues Training hinzufügen'}"></h1>
+
+    <form method="POST"
+          th:action="${run.id} != null ? @{'/runs/update/' + ${run.id}} : @{/runs}"
+          th:object="${run}"
+          class="createEditRun d-flex flex-column">
+
+        <label for="distance">Distanz</label>
+        <input type="number" step="0.1" th:field="*{distance}" id="distance" required/>
+
+        <label for="duration">Dauer</label>
+        <input type="number" th:field="*{duration}" id="duration" required/>
+
+        <label for="date">Datum</label>
+        <input type="datetime-local" th:field="*{datetime}" id="date" required>
+
+        <div class="my-2 d-flex align-items-center">
+            <i class="fa-solid fa-location-dot me-2"></i>
+            <p th:text="${runner.location.address}"></p>
+        </div>
+
+        <input type="hidden" th:field="*{id}" />
+
+        <button type="submit" class="btn btn-primary w-100">Speichern</button>
+    </form>
+
+</section>
+
+
+</body>
+</html>

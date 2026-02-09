@@ -1,0 +1,25 @@
+<article th:fragment="weekly_goal" class="component" xmlns:th="http://www.w3.org/1999/xhtml">
+    <div class="component_box">
+        <div class="d-flex justify-content-between">
+            <h2>Mein Wochenziel</h2>
+            <a th:if="${goal != null}" th:href="@{'/goal/edit/' + ${goal.id}}" class="btn btn-primary">
+                <i class="fa-regular fa-pen-to-square"></i>
+            </a>
+            <a th:if="${goal == null}" class="btn btn-primary" href="/goal/new">Setze dir ein Ziel</a>
+        </div>
+
+        <div th:if="${goal != null}" class="text-center">
+            <p class="d-flex justify-content-center p-2">
+                <i th:if="${goal.isAchieved()}" class="fa-solid fa-circle-check fa_icon_xxl"></i>
+                <i th:unless="${goal.isAchieved()}" class="fa-regular fa-circle fa_icon_xxl"></i>
+            </p>
+
+            <p th:text="${goal.getProgress()}" class="text-center"></p>
+            <span>von </span>
+            <span th:text="${goal.getTargetAmount()}"></span>
+            <span th:if="${goal.getType() == T(com.paf.runningweather.goal.GoalType).DISTANCE}"> km</span>
+            <span th:if="${goal.getType() == T(com.paf.runningweather.goal.GoalType).NUMBER}"> Trainings</span>
+        </div>
+
+    </div>
+</article>
